@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Birthday Gift Hunt for Tajwar</title>
   <style>
     body {
@@ -36,54 +36,59 @@
       background: transparent;
       cursor: pointer;
       transition: transform 0.3s ease;
-      position: relative;
     }
 
     .gift-box:hover {
       transform: scale(1.1);
     }
 
-    .confetti {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      animation: confetti-fall 1s ease-out forwards;
-      font-size: 1.5rem;
-      color: #ff4081;
-    }
-
-    @keyframes confetti-fall {
-      0% { transform: translateY(0); opacity: 1; }
-      100% { transform: translateY(40px); opacity: 0; }
-    }
-
+    /* Surprise message box */
     #message {
-      margin-top: 30px;
-      font-size: 1.4rem;
-      color: #00796b;
-    }
-
-    #popupOverlay {
-      display: none;
       position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.5);
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 80%;
+      background: rgba(255, 255, 255, 0.95);
+      padding: 25px 40px;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+      font-size: 1.6rem;
+      color: #00796b;
+      display: none;
+      z-index: 999;
+      user-select: none;
+      cursor: default;
+      margin: 0;
     }
 
-    #popupBox {
-      background: #ffffff;
-      padding: 30px 40px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-      font-size: 1.5rem;
-      color: #6d4c41;
+    /* Close button */
+    #closeBtn {
+      position: absolute;
+      top: 8px;
+      right: 12px;
+      font-size: 24px;
+      color: #00796b;
+      cursor: pointer;
+      user-select: none;
+      font-weight: bold;
+    }
+
+    /* Shine animation */
+    @keyframes shine {
+      0% {
+        box-shadow: 0 0 8px 2px #ffd700;
+      }
+      50% {
+        box-shadow: 0 0 20px 5px #ffea00;
+      }
+      100% {
+        box-shadow: 0 0 8px 2px #ffd700;
+      }
+    }
+
+    .shine-effect {
+      animation: shine 1.5s infinite;
     }
 
     #creatorTag {
@@ -111,10 +116,11 @@
     <!-- Gift boxes will be inserted here -->
   </div>
 
-  <div id="message"></div>
-  <div id="popupOverlay">
-    <div id="popupBox">🎉 All gifts have been unboxed! 🎉</div>
+  <div id="message">
+    <span id="closeBtn" onclick="closeMessage()">×</span>
+    <div id="messageText"></div>
   </div>
+
   <div id="creatorTag">Made by: Syed Measum Abbas</div>
 
   <script>
@@ -131,37 +137,32 @@
 
     const container = document.getElementById('giftContainer');
     const messageDiv = document.getElementById('message');
-    const popupOverlay = document.getElementById('popupOverlay');
+    const messageText = document.getElementById('messageText');
+
     let openedCount = 0;
 
-    for (let i = 0; i < messages.length; i++) {
+    for (let i = 0; i < 8; i++) {
       const box = document.createElement('button');
       box.className = 'gift-box';
       box.textContent = '🎁';
-
       box.onclick = () => {
-        if (box.disabled) return;
+        if (box.classList.contains('opened')) return; // prevent multiple clicks
+        box.classList.add('opened');
         box.disabled = true;
         box.style.opacity = 0.4;
-        messageDiv.textContent = messages[i];
-        showConfetti(box);
+        box.classList.add('shine-effect');
+        messageText.textContent = messages[i];
+        messageDiv.style.display = 'block';
         openedCount++;
-        if (openedCount === messages.length) {
-          setTimeout(() => {
-            popupOverlay.style.display = 'flex';
-          }, 800);
+        if (openedCount === 8) {
+          setTimeout(() => alert("All your gifts are unboxed! 🎉🎁"), 500);
         }
       };
-
       container.appendChild(box);
     }
 
-    function showConfetti(box) {
-      const confetti = document.createElement('div');
-      confetti.className = 'confetti';
-      confetti.textContent = '🎊';
-      box.appendChild(confetti);
-      setTimeout(() => box.removeChild(confetti), 1000);
+    function closeMessage() {
+      messageDiv.style.display = 'none';
     }
   </script>
 </body>
