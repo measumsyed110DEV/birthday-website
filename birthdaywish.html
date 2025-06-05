@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday to My Queen Tajwar!</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(to right, #fff0f5, #ffe4e1);
+      overflow: hidden;
+    }
+
+    .envelope {
+      width: 300px;
+      height: 200px;
+      background: #ffb6c1;
+      position: relative;
+      margin: 100px auto;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      animation: float 3s ease-in-out infinite;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .message {
+      display: none;
+      text-align: center;
+      padding: 20px;
+      animation: fadeIn 1s forwards;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      margin: 50px auto;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .card h1 {
+      color: #d63384;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    #creatorTag {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff69b4cc;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+      cursor: default;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="envelope" onclick="showMessage()">
+    <strong>Click to open your surprise, Wifey Tajwar 💌</strong>
+  </div>
+
+  <div class="message" id="msg">
+    <div class="card">
+      <h1>To My Dear Wife, Tajwar</h1>
+      <p>
+        Happy Birthday to the love of my life! ❤️<br>
+        Every day with you is a blessing, but today is extra special because it’s yours.<br>
+        I’m grateful to call you mine, and I promise to keep loving, supporting, and making you smile forever.
+      </p>
+      <p style="font-weight: bold; color: #ff1493;">— With all my heart, Shayan Shah</p>
+    </div>
+  </div>
+
+  <div id="creatorTag">Made by: Syed Measum Abbas</div>
+
+  <script>
+    function showMessage() {
+      document.querySelector('.envelope').style.display = 'none';
+      document.getElementById('msg').style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
