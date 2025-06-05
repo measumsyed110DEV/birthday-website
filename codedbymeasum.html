@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday Bhabhi Tajwar!</title>
+  <link rel="icon" href="download.png" type="image/png" />
+
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to bottom right, #ffd1dc, #ffe6f0);
+      color: #333;
+      text-align: center;
+      overflow-x: hidden;
+    }
+    .main-page, .cake-page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    .main-page.active, .cake-page.active {
+      display: flex;
+    }
+    .cake-page {
+      /* Added padding-bottom to avoid overlap with fixed creator tag */
+      padding-bottom: 70px;
+    }
+    .start-button {
+      padding: 1rem 2rem;
+      background-color: #ff69b4;
+      color: white;
+      font-size: 1.5rem;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+    .start-button:hover {
+      transform: scale(1.05);
+    }
+    .cake-image {
+      width: 250px;
+      height: 250px;
+      background-image: url('https://img.icons8.com/color/250/birthday-cake.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+    .cake-image.clicked {
+      background-image: url('https://img.icons8.com/emoji/250/shortcake.png');
+      animation: shake 0.4s;
+    }
+    @keyframes shake {
+      0% { transform: rotate(0); }
+      25% { transform: rotate(5deg); }
+      50% { transform: rotate(-5deg); }
+      75% { transform: rotate(5deg); }
+      100% { transform: rotate(0); }
+    }
+    .wish-message {
+      display: none;
+      font-size: 1.4rem;
+      margin-top: 1rem;
+      color: #d63384;
+      animation: fadeIn 1s ease-in-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Small fixed "Made by" tag */
+    #creatorTag {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #ff69b4cc;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+      cursor: default;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="main-page active" id="mainPage">
+    <h1>🎉 Happy Birthday Bhabhi Tajwar! 🎂</h1>
+    <p>Click below to unlock your birthday surprise!</p>
+    <button class="start-button" onclick="goToCakePage()">Click Me 🎁</button>
+  </div>
+
+  <div class="cake-page" id="cakePage">
+    <h2 id="cakeHeader">🎂 Here’s Your Cake Bhabhi! 🎂</h2>
+    <p id="cutPrompt">Click it to cut it! 🍰</p>
+    <div class="cake-image" id="cake" onclick="cutCake()"></div>
+    <div class="wish-message" id="wishMsg">
+      💖 May your day be filled with joy, love, and sweet surprises! 💖<br />
+      🎉 Wishing you continued success, happiness, and blessings, Bhabhi Tajwar. 🎉
+    </div>
+  </div>
+
+  <div id="creatorTag">Made by: Syed Measum Abbas</div>
+
+  <script>
+    function goToCakePage() {
+      document.getElementById('mainPage').classList.remove('active');
+      document.getElementById('cakePage').classList.add('active');
+    }
+
+    function cutCake() {
+      const cake = document.getElementById('cake');
+      const wish = document.getElementById('wishMsg');
+      const cutPrompt = document.getElementById('cutPrompt');
+      const cakeHeader = document.getElementById('cakeHeader');
+      cake.classList.add('clicked');
+      wish.style.display = 'block';
+      if (cutPrompt) cutPrompt.style.display = 'none';
+      cakeHeader.style.animation = 'shake 0.5s infinite';
+    }
+  </script>
+</body>
+</html>
