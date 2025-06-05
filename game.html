@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Gift Hunt for Tajwar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e0f7fa, #fff3e0);
+      color: #444;
+      text-align: center;
+    }
+
+    h1 {
+      margin-top: 40px;
+      font-size: 2.5rem;
+      color: #6d4c41;
+    }
+
+    .game-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 40px;
+      padding: 20px;
+    }
+
+    .gift-box {
+      width: 120px;
+      height: 120px;
+      margin: 15px;
+      font-size: 3rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+      position: relative;
+    }
+
+    .gift-box:hover {
+      transform: scale(1.1);
+    }
+
+    .confetti {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      animation: confetti-fall 1s ease-out forwards;
+      font-size: 1.5rem;
+      color: #ff4081;
+    }
+
+    @keyframes confetti-fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(40px); opacity: 0; }
+    }
+
+    #message {
+      margin-top: 30px;
+      font-size: 1.4rem;
+      color: #00796b;
+    }
+
+    #popupOverlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    #popupBox {
+      background: #ffffff;
+      padding: 30px 40px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+      font-size: 1.5rem;
+      color: #6d4c41;
+    }
+
+    #creatorTag {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #a1887fcc;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 12px;
+      font-weight: bold;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      user-select: none;
+      cursor: default;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Birthday Gift Hunt for Tajwar ✨</h1>
+  <p>Click the gift boxes below to reveal your surprises from Shayan Shah!</p>
+
+  <div class="game-container" id="giftContainer">
+    <!-- Gift boxes will be inserted here -->
+  </div>
+
+  <div id="message"></div>
+  <div id="popupOverlay">
+    <div id="popupBox">🎉 All gifts have been unboxed! 🎉</div>
+  </div>
+  <div id="creatorTag">Made by: Syed Measum Abbas</div>
+
+  <script>
+    const messages = [
+      "You're the best part of Shayan's life. 💖",
+      "This day is all about YOU, queen Tajwar! 👑",
+      "Smile brighter today, it's your special day! 🎉",
+      "A hug from Shayan, wrapped in code. 🤗",
+      "May your dreams come true, always. 🌸",
+      "You make every day sweeter, just like cake! 🍰",
+      "Here's a digital rose from your husband 🌹",
+      "Forever his favorite person in the world. 💌",
+    ];
+
+    const container = document.getElementById('giftContainer');
+    const messageDiv = document.getElementById('message');
+    const popupOverlay = document.getElementById('popupOverlay');
+    let openedCount = 0;
+
+    for (let i = 0; i < messages.length; i++) {
+      const box = document.createElement('button');
+      box.className = 'gift-box';
+      box.textContent = '🎁';
+
+      box.onclick = () => {
+        if (box.disabled) return;
+        box.disabled = true;
+        box.style.opacity = 0.4;
+        messageDiv.textContent = messages[i];
+        showConfetti(box);
+        openedCount++;
+        if (openedCount === messages.length) {
+          setTimeout(() => {
+            popupOverlay.style.display = 'flex';
+          }, 800);
+        }
+      };
+
+      container.appendChild(box);
+    }
+
+    function showConfetti(box) {
+      const confetti = document.createElement('div');
+      confetti.className = 'confetti';
+      confetti.textContent = '🎊';
+      box.appendChild(confetti);
+      setTimeout(() => box.removeChild(confetti), 1000);
+    }
+  </script>
+</body>
+</html>
